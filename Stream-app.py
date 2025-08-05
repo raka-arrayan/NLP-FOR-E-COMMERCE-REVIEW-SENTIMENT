@@ -25,9 +25,15 @@ def download_nltk_resources():
 download_nltk_resources()
 
 
-# ==== Streamlit UI ====
+import streamlit as st
+
+# ==== Page Configuration ====
 st.set_page_config(page_title="NLP Sentiment Analysis", layout="centered")
-st.title("APPLICATION OF NLP FOR E-COMMERCE REVIEW SENTIMENT")
+
+# ==== Page Title ====
+st.markdown("<h1 style='text-align: center; color: #4B8BBE;'>E-Commerce Review Sentiment Analyzer</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 18px;'>Unlock insights from product reviews using Natural Language Processing (NLP)</p>", unsafe_allow_html=True)
+
 
 # ==== Preprocessing Tools ====
 stop_words = set(stopwords.words('english'))
@@ -74,7 +80,7 @@ st.sidebar.success("Logistic Regression model loaded.")
 
 # ==== Input UI ====
 st.subheader("Enter an E-Commerce Product Review")
-content = st.text_area("Input your review here:(in english)")
+content = st.text_area("Please enter your product review below. The analysis works best with English reviews.")
 
 # ==== Prediction ====
 if st.button("Classify"):
