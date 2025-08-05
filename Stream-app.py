@@ -74,7 +74,7 @@ st.sidebar.success("Logistic Regression model loaded.")
 
 # ==== Input UI ====
 st.subheader("Enter an E-Commerce Product Review")
-content = st.text_area("Input your review here:")
+content = st.text_area("Input your review here:(in english)")
 
 # ==== Prediction ====
 if st.button("Classify"):
@@ -105,4 +105,5 @@ if st.button("Classify"):
 
 # ==== Footer ====
 st.markdown("---")
-st.markdown("© 2025 NLP Sentiment Analysis. All rights reserved.")
+st.markdown("© 2025 NLP Sentiment Analysis. All rights reserved. | by Raka Arrayan")
+
