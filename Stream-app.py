@@ -7,17 +7,19 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 
+# ==== Download NLTK resources only if not already available ====
+nltk_packages = ['punkt', 'wordnet', 'omw-1.4', 'averaged_perceptron_tagger', 'stopwords']
+for package in nltk_packages:
+    try:
+        nltk.data.find(f'tokenizers/{package}' if package == 'punkt' else f'corpora/{package}')
+    except LookupError:
+        nltk.download(package)
+
+# ==== Streamlit UI ====
 st.set_page_config(page_title="NLP Sentiment Analysis", layout="centered")
 st.title("APPLICATION OF NLP FOR E-COMMERCE REVIEW SENTIMENT")
 
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('averaged_perceptron_tagger_eng')
-
-
+# ==== Preprocessing Tools ====
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
@@ -51,19 +53,20 @@ def get_wordnet_pos(word):
 def lemmatize_review(review):
     return [lemmatizer.lemmatize(word, get_wordnet_pos(word)) for word in review]
 
-
+# ==== Load Trained Vectorizer & Model ====
 with open('tfidf_vectorizer.sav', 'rb') as f:
     tfidf_vectorizer = pickle.load(f)
 st.sidebar.success("TF-IDF vectorizer loaded.")
-
 
 with open('logistic_regression_model.sav', 'rb') as f:
     model = pickle.load(f)
 st.sidebar.success("Logistic Regression model loaded.")
 
+# ==== Input UI ====
 st.subheader("Enter an E-Commerce Product Review")
 content = st.text_area("Input your review here:")
 
+# ==== Prediction ====
 if st.button("Classify"):
     if content.strip():
         try:
@@ -74,13 +77,12 @@ if st.button("Classify"):
             final_text = ' '.join(lemmatized)
 
             text_tfidf = tfidf_vectorizer.transform([final_text])
-
             prediction = model.predict(text_tfidf)[0]
 
             if prediction == 'positif':
                 st.success('The sentiment is POSITIVE.')
             elif prediction == 'netral':
-                st.info('ℹThe sentiment is NEUTRAL.')
+                st.info('The sentiment is NEUTRAL.')
             elif prediction == 'negatif':
                 st.warning('The sentiment is NEGATIVE.')
             else:
@@ -90,3 +92,7 @@ if st.button("Classify"):
             st.error(f"An error occurred during classification: {str(e)}")
     else:
         st.warning("Please enter a review to classify.")
+
+# ==== Footer ====
+st.markdown("---")
+st.markdown("© 2025 NLP Sentiment Analysis. All rights reserved.")
