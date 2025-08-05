@@ -18,6 +18,7 @@ def download_nltk_resources():
         nltk.download('wordnet', quiet=True)
         nltk.download('omw-1.4', quiet=True)
         nltk.download('averaged_perceptron_tagger', quiet=True)
+        nltk.download('averaged_perceptron_tagger_eng', quiet=True)
     except Exception as e:
         print(f"NLTK download error: {e}")
 
