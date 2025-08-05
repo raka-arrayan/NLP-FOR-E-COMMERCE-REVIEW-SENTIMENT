@@ -57,9 +57,9 @@ with open('tfidf_vectorizer.sav', 'rb') as f:
 st.sidebar.success("TF-IDF vectorizer loaded.")
 
 
-with open('random_forest_model.sav', 'rb') as f:
+with open('logistic_regression_model.sav', 'rb') as f:
     model = pickle.load(f)
-st.sidebar.success("Random Forest model loaded.")
+st.sidebar.success("Logistic Regression model loaded.")
 
 st.subheader("Enter an E-Commerce Product Review")
 content = st.text_area("Input your review here:")
