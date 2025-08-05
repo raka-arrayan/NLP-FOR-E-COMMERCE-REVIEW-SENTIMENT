@@ -7,13 +7,22 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 
-# ==== Download NLTK resources only if not already available ====
-nltk_packages = ['punkt', 'wordnet', 'omw-1.4', 'averaged_perceptron_tagger', 'stopwords']
-for package in nltk_packages:
+# ==== NLTK Resource Downloader ====
+import nltk
+
+def download_nltk_resources():
     try:
-        nltk.data.find(f'tokenizers/{package}' if package == 'punkt' else f'corpora/{package}')
-    except LookupError:
-        nltk.download(package)
+        nltk.download('punkt', quiet=True)
+        nltk.download('punkt_tab', quiet=True)
+        nltk.download('stopwords', quiet=True)
+        nltk.download('wordnet', quiet=True)
+        nltk.download('omw-1.4', quiet=True)
+        nltk.download('averaged_perceptron_tagger', quiet=True)
+    except Exception as e:
+        print(f"NLTK download error: {e}")
+
+download_nltk_resources()
+
 
 # ==== Streamlit UI ====
 st.set_page_config(page_title="NLP Sentiment Analysis", layout="centered")
