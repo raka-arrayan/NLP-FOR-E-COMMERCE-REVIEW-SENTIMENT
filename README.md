@@ -2,6 +2,9 @@
 
 A simple web app built with **Streamlit** that uses **Natural Language Processing (NLP)** to analyze and classify the sentiment of e-commerce product reviews into **Positive**, **Neutral**, or **Negative**.
 
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live--App-brightgreen?logo=streamlit)](https://e-commerce-review-sentiment.streamlit.app/)
+
+
 ## Features
 
 - Preprocessing: Text cleaning, lowercase conversion, removal of punctuation, numbers, and stopwords, whitespace cleanup, tokenization, and lemmatization.
